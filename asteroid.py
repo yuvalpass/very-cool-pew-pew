@@ -58,10 +58,11 @@ class Asteroid:
         distance_from_obj = math.sqrt(
             (obj_location[0] - self.__x_location)**2 +
             (obj_location[1]-self.__y_location)**2)
-        if distance_from_obj <= self.__radius + obj.get_radius():
-            return True
-        else:
-            return False
+        #if distance_from_obj <= self.__radius + obj.get_radius():
+ #           return True
+  #      else:
+      #      return False
+        return True if distance_from_obj <= self.__radius + obj.get_radius() else False
 
     def get_radius(self):
         """
