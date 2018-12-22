@@ -281,6 +281,10 @@ class GameRunner:
         new_size = asteroid.get_size() - 1
 
         # -------------------create two new asteroids---------------------
+        
+        #todo for myself michael to check if we need to add new one incase new size 0
+        
+        
         asteroid1 = Asteroid(asteroid_location,
                              (new_x_speed, new_y_speed), new_size)
         asteroid2 = Asteroid(asteroid_location,
