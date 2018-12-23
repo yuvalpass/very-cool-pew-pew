@@ -6,6 +6,9 @@ from ship import *
 from asteroid import *
 from torpedo import *
 
+DEFUALT_CLASS_SETTING=0
+SPECIAL_MOVE_DEGREE_CHANGE=45
+SPECIAL_MOVE_MIN=2
 DEFAULT_ASTEROIDS_NUM = 5
 STARTING_SCORE = 0
 STARTING_DIRECTION = 0
@@ -20,6 +23,7 @@ MID_ASTEROID_POINTS = 50
 SMALL_ASTEROID_POINTS = 100
 MAX_TORPEDO_NUM = 10
 TORPEDO_LIFETIME_MAX = 200
+CHANGE_DEGREE=7
 HIT_TITLE = "You were hit!"
 HIT_MSG = "You have lost 1 life"
 END_TITLE = "End of game"
@@ -54,7 +58,7 @@ class GameRunner:
         # ----------------create torpedo list -------------------
         self.torpedo_list = []
 
-    def create_asteroids(self, asteroids_amount):
+    def create_asteroids(self, asteroids_amount):#to check if the else is okay
         """
         this function will create all the initial asteroids for te game
         :param asteroids_amount: int - how many asteroids
@@ -131,22 +135,22 @@ class GameRunner:
     def _game_loop(self):
         # ----------------draw objects---------------------
         self.__screen.draw_ship(*self.__ship.get_location(),
-                                self.__ship.get_direction())
+                           self.__ship.get_direction())
 
         for asteroid in self.asteroids_list:
             self.__screen.draw_asteroid(asteroid, *asteroid.get_location())
 
         for torpedo in self.torpedo_list:
             self.__screen.draw_torpedo(torpedo, *torpedo.get_location(),
-                                       torpedo.get_direction())
+                           torpedo.get_direction())
 
         # ------------------move objects------------------------
 
         # ----------------ship------------------
         if self.__screen.is_right_pressed():
-            self.__ship.set_direction(-7)
+            self.__ship.set_direction(- CHANGE_DEGREE)
         if self.__screen.is_left_pressed():
-            self.__ship.set_direction(7)
+            self.__ship.set_direction(CHANGE_DEGREE)
         if self.__screen.is_up_pressed():
             self.__ship.accelerate()
         self.move_object(self.__ship)
@@ -164,7 +168,61 @@ class GameRunner:
             self.torpedo_update(torpedo)
 
         # -------------------ending----------------------------
+
+        #--------------------check for teleport----------------
+
+        if self.__screen.is_teleport_pressed():
+            self.teleport()
+
+        #--------------------special move----------------------
+        if self.__screen.is_special_pressed():
+            self.special_move()
+        #--------------------ending----------------------
+
         self.check_ending()
+
+    def special_move(self):
+       """
+        this function makes the ship shoot 8 torpedos that are 45 degrees apart
+        from each other.starting from the same location
+       :return:
+       """
+       if len(self.torpedo_list)<=SPECIAL_MOVE_MIN:
+           for i in range(8):#todo make 8 constant
+               self.__ship.set_direction(SPECIAL_MOVE_DEGREE_CHANGE)
+
+               torpedo = self.create_torpedo()
+               self.torpedo_list.append(torpedo)
+
+
+           for torpedo in self.torpedo_list:
+               self.torpedo_update(torpedo)
+
+
+
+
+    def teleport(self):
+        """
+        this function teleports the ship to a new random location that doesnt
+        collide with any astroid
+        :return:
+        """
+        teleport_x_loc,teleport_y_loc=0,0
+        while True:
+            teleport_x_loc = random.randint(self.__screen_min_x,
+                         self.__screen_max_x)
+            teleport_y_loc = random.randint(self.__screen_min_y,
+                         self.__screen_max_y)
+            ship_check=Ship((teleport_x_loc,teleport_y_loc), 
+                DEFUALT_CLASS_SETTING,DEFUALT_CLASS_SETTING)
+            for i in self.asteroids_list:
+                if i.has_intersection(ship_check):
+                    break
+            else:
+                break
+        self.__ship.set_location(teleport_x_loc,teleport_y_loc)
+
+
 
     def check_ending(self):
         """
@@ -172,11 +230,11 @@ class GameRunner:
         should. It will also print an informative message.
         """
         is_exit = False
-        if self.asteroids_list == []:
-            self.__screen.show_message(END_TITLE, WON_MSG)
-            is_exit = True
-        elif self.__ship.get_lives() == 0:
+        if self.__ship.get_lives() == 0:
             self.__screen.show_message(END_TITLE, LOST_MSG)
+            is_exit = True
+        elif self.asteroids_list == []:
+            self.__screen.show_message(END_TITLE, WON_MSG)
             is_exit = True
         elif self.__screen.should_end():
             self.__screen.show_message(END_TITLE, QUIT_MSG)
@@ -253,11 +311,13 @@ class GameRunner:
         elif asteroid.get_size() == ASTEROID_MID_SIZE:
             self.__score += MID_ASTEROID_POINTS
             self.split_asteroid(asteroid, torpedo)
-        elif asteroid.get_size == ASTEROID_MIN_SIZE:
+        else:
             self.__score += SMALL_ASTEROID_POINTS
             # remove the asteroid
             self.__screen.unregister_asteroid(asteroid)
             self.asteroids_list.remove(asteroid)
+
+        print(len(self.asteroids_list))#todo remove this
         self.__screen.set_score(self.__score)
 
         # ------------remove the torpedo-------------
@@ -281,10 +341,6 @@ class GameRunner:
         new_size = asteroid.get_size() - 1
 
         # -------------------create two new asteroids---------------------
-        
-        #todo for myself michael to check if we need to add new one incase new size 0
-        
-        
         asteroid1 = Asteroid(asteroid_location,
                              (new_x_speed, new_y_speed), new_size)
         asteroid2 = Asteroid(asteroid_location,
@@ -297,6 +353,8 @@ class GameRunner:
         # --------------------delete former asteroid-----------------------
         self.__screen.unregister_asteroid(asteroid)
         self.asteroids_list.remove(asteroid)
+
+
 
 
 def main(amount): #todo not to touch
