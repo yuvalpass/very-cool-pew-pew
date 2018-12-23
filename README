@@ -23,6 +23,10 @@ intro2cs1 asteroids_main.py 2018-2019
 =  Special Comments  =
 ======================
 
-explain three diffrent decision:
+explain three different decision:
 
-1)
+1)if to create an additional class that will contain list of torpedo objects and a list or other variable that will
+identify the use of the special move.soo its possible to add more special attacks in this class( Arsenal)
+
+-this option gives the programmer the flexibility to change and to add different stuff to the game with out touching
+ the other classes. making it more safe for him from ruining the program and easier to find bugs with the added code
