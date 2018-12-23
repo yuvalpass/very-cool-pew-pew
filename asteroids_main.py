@@ -207,7 +207,7 @@ class GameRunner:
         collide with any astroid
         :return:
         """
-        teleport_x_loc,teleport_y_loc=0,0
+        
         while True:
             teleport_x_loc = random.randint(self.__screen_min_x,
                          self.__screen_max_x)
