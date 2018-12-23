@@ -213,7 +213,7 @@ class GameRunner:
                          self.__screen_max_x)
             teleport_y_loc = random.randint(self.__screen_min_y,
                          self.__screen_max_y)
-            ship_check=Ship((teleport_x_loc,teleport_y_loc), 
+            ship_check=Ship((teleport_x_loc,teleport_y_loc),
                 DEFUALT_CLASS_SETTING,DEFUALT_CLASS_SETTING)
             for i in self.asteroids_list:
                 if i.has_intersection(ship_check):
@@ -317,7 +317,6 @@ class GameRunner:
             self.__screen.unregister_asteroid(asteroid)
             self.asteroids_list.remove(asteroid)
 
-        print(len(self.asteroids_list))#todo remove this
         self.__screen.set_score(self.__score)
 
         # ------------remove the torpedo-------------
