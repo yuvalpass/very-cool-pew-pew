@@ -207,11 +207,13 @@ class GameRunner:
         collide with any astroid
         :return:
         """
-        
+        #to reset or not the tele location 
+        teleport_x_loc=0
+        teleport_y_loc=0
         while True:
             teleport_x_loc = random.randint(self.__screen_min_x,
                          self.__screen_max_x)
-            teleport_y_loc = random.randint(self.__screen_min_y,
+            teleport_y_loc  = random.randint(self.__screen_min_y,
                          self.__screen_max_y)
             ship_check=Ship((teleport_x_loc,teleport_y_loc),
                 DEFUALT_CLASS_SETTING,DEFUALT_CLASS_SETTING)
