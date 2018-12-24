@@ -207,9 +207,9 @@ class GameRunner:
         collide with any astroid
         :return:
         """
-        #to reset or not the tele location 
-        teleport_x_loc=0
-        teleport_y_loc=0
+       
+        teleport_x_loc = DEFUALT_CLASS_SETTING
+        teleport_y_loc = DEFUALT_CLASS_SETTING
         while True:
             teleport_x_loc = random.randint(self.__screen_min_x,
                          self.__screen_max_x)
