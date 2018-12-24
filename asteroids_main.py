@@ -201,7 +201,7 @@ class GameRunner:
 
 
 
-      def teleport(self):
+    def teleport(self):
         """
         this function teleports the ship to a new random location that doesnt
         collide with any astroid
@@ -218,11 +218,10 @@ class GameRunner:
             ship_check=Ship((teleport_x_loc,teleport_y_loc),
                 DEFUALT_CLASS_SETTING,DEFUALT_CLASS_SETTING)
             for i in self.asteroids_list:
-                if not i.has_intersection(ship_check):
+                if i.has_intersection(ship_check):
                     break
             else:
-                continue
-            break
+                break
         self.__ship.set_location(teleport_x_loc,teleport_y_loc)
 
 
