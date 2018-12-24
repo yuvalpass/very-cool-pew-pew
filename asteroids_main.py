@@ -219,7 +219,8 @@ class GameRunner:
                 if i.has_intersection(ship_check):
                     break
             else:
-                break
+                continue
+            break 
         self.__ship.set_location(teleport_x_loc,teleport_y_loc)
 
 
