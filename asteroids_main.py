@@ -201,28 +201,28 @@ class GameRunner:
 
 
 
-    def teleport(self):
+      def teleport(self):
         """
         this function teleports the ship to a new random location that doesnt
         collide with any astroid
         :return:
         """
-       
+
         teleport_x_loc = DEFUALT_CLASS_SETTING
         teleport_y_loc = DEFUALT_CLASS_SETTING
         while True:
             teleport_x_loc = random.randint(self.__screen_min_x,
-                         self.__screen_max_x)
+                self.__screen_max_x)
             teleport_y_loc  = random.randint(self.__screen_min_y,
-                         self.__screen_max_y)
+                self.__screen_max_y)
             ship_check=Ship((teleport_x_loc,teleport_y_loc),
                 DEFUALT_CLASS_SETTING,DEFUALT_CLASS_SETTING)
             for i in self.asteroids_list:
-                if i.has_intersection(ship_check):
+                if not i.has_intersection(ship_check):
                     break
             else:
                 continue
-            break 
+            break
         self.__ship.set_location(teleport_x_loc,teleport_y_loc)
 
 
