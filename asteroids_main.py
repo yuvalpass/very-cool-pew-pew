@@ -159,11 +159,15 @@ class GameRunner:
         for asteroid in self.asteroids_list:
             self.update_asteroid(asteroid)
 
-        # -----------------torpedoes-------------
+        # -----------------torpedoes -------------
         if self.__screen.is_space_pressed():
             if len(self.torpedo_list) < MAX_TORPEDO_NUM:
                 torpedo = self.create_torpedo()
                 self.torpedo_list.append(torpedo)
+        #--------------------special move----------------------
+        if self.__screen.is_special_pressed():
+            self.special_move() 
+                
         for torpedo in self.torpedo_list:
             self.torpedo_update(torpedo)
 
@@ -174,9 +178,7 @@ class GameRunner:
         if self.__screen.is_teleport_pressed():
             self.teleport()
 
-        #--------------------special move----------------------
-        if self.__screen.is_special_pressed():
-            self.special_move()
+        
         #--------------------ending----------------------
 
         self.check_ending()
@@ -190,13 +192,8 @@ class GameRunner:
        if len(self.torpedo_list)<=SPECIAL_MOVE_MIN:
            for i in range(8):#todo make 8 constant
                self.__ship.set_direction(SPECIAL_MOVE_DEGREE_CHANGE)
-
                torpedo = self.create_torpedo()
                self.torpedo_list.append(torpedo)
-#todo run this chekc inside torpeeo so we cab renome thr for part down below
-
-           for torpedo in self.torpedo_list:
-               self.torpedo_update(torpedo)
 
 
 
