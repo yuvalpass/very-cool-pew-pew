@@ -193,7 +193,7 @@ class GameRunner:
 
                torpedo = self.create_torpedo()
                self.torpedo_list.append(torpedo)
-
+#todo run this chekc inside torpeeo so we cab renome thr for part down below
 
            for torpedo in self.torpedo_list:
                self.torpedo_update(torpedo)
