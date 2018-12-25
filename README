@@ -1,6 +1,8 @@
 michael.malkis
 316229269
 michaelmalkis
+yuval_pass
+318407541
 
 I discussed the exercise with: no one
 
@@ -25,8 +27,34 @@ intro2cs1 asteroids_main.py 2018-2019
 
 explain three different decision:
 
-1)if to create an additional class that will contain list of torpedo objects and a list or other variable that will
+1)special moves:
+We had to decide whether to create an additional class that will contain list of torpedo objects and a list or other variable that will
 identify the use of the special move.soo its possible to add more special attacks in this class( Arsenal)
 
--this option gives the programmer the flexibility to change and to add different stuff to the game with out touching
- the other classes. making it more safe for him from ruining the program and easier to find bugs with the added code
+-this option gives the programmer the flexibility to change and to add different stuff to the game without touching
+ the other classes. making it more safe for him from ruining the program and easier to find bugs with the added code.
+ 
+ we decided not to add this class because we wanted the special move to act exactly like the existing torpedos
+ and to have their cualities.
+ 
+ 2) move the object:
+ We had a choise whether to define the object movements in the main game or in each class seperatlly.
+ 
+ - defining the movement for each object gives more flexability and is easier to controll and give specific features.
+ 
+ we evantually decided to define the move method in the main game so it will work the same for all the objects in the game. We thougth
+ it was best to give all the game objects the same movment cuallities and keep all the monitoring data in the game class.
+ that way the game "knows" all about the objects while the objects "takes orders" from the game alone.
+ 
+ 3)where to keep the arsenal limitations:
+ We needed to decide where we should handle the arsenal limitetion, the number of torpedos allowed and existing.
+ 
+ - storing these methods in the ship class makes sense, beacause the ship is in charge of firing the torpetos and all of the
+ torpedos are fired _from_ the ship.
+ 
+ we however chose to handle the arsenal from the main game. that way all of the action is operated from the main game class.
+ no class operates anything in the game except the main game. That way the code in more stractured, readable and easy to alter.
+ 
+ 
+ explain the special move:
+ 
