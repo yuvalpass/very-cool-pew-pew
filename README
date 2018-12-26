@@ -28,8 +28,9 @@ intro2cs1 asteroids_main.py 2018-2019
 explain three different decision:
 
 1)special moves:
-We had to decide whether to create an additional class that will contain list of torpedo objects and a list or other variable that will
-identify the use of the special move.soo its possible to add more special attacks in this class( Arsenal)
+We had to decide whether to create an additional class that will contain list of torpedo objects and a list 
+or other variable that will identify the use of the special move.soo its possible to add more special attacks
+in this class( Arsenal)
 
 -this option gives the programmer the flexibility to change and to add different stuff to the game without touching
  the other classes. making it more safe for him from ruining the program and easier to find bugs with the added code.
@@ -42,9 +43,9 @@ identify the use of the special move.soo its possible to add more special attack
  
  - defining the movement for each object gives more flexability and is easier to controll and give specific features.
  
- we evantually decided to define the move method in the main game so it will work the same for all the objects in the game. We thougth
- it was best to give all the game objects the same movment cuallities and keep all the monitoring data in the game class.
- that way the game "knows" all about the objects while the objects "takes orders" from the game alone.
+ we evantually decided to define the move method in the main game so it will work the same for all the objects in the game.
+ We thougth it was best to give all the game objects the same movment cuallities and keep all the monitoring data in
+ the game class. that way the game "knows" all about the objects while the objects "takes orders" from the game alone.
  
  3)where to keep the arsenal limitations:
  We needed to decide where we should handle the arsenal limitetion, the number of torpedos allowed and existing.
@@ -58,6 +59,7 @@ identify the use of the special move.soo its possible to add more special attack
  
  explain the special move:
  The special move makes the ship apin full circle (360 degrees) and for each 45 
- degrees that the ship passes it shoots one torpedo. After it finishes the move the ship shot 8 times and continues flying the same direction 
+ degrees that the ship passes it shoots one torpedo. After it finishes the move the ship shot 8 times 
+ and continues flying the same direction.
  
  
